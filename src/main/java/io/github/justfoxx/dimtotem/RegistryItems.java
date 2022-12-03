@@ -11,6 +11,6 @@ import net.minecraft.util.registry.Registry;
 public class RegistryItems {
     public static final DimTotemItem DIM_TOTEM = new DimTotemItem();
     public static void init() {
-        if(Configs.itemConfig.data.enabled) Registry.register(Registry.ITEM, PreMain.g.id("dimtotemitem"), DIM_TOTEM);
+        if(Configs.itemConfig.data.enabled) Registry.register(Registry.ITEM, PreMain.g.id("dimensional_totem"), DIM_TOTEM);
     }
 }

@@ -50,34 +50,21 @@ public class ServerPlayerEntityMixin {
         TypedActionResult<ItemStack> result;
         if(mainHandStack.isOf(RegistryItems.DIM_TOTEM)) {
             totemStack = mainHandStack;
-            totem = (DimTotemItem) mainHandStack.getItem();
-            result = totem.teleportUse(player, destination, mainHandStack);
         } else if(offHandStack.isOf(RegistryItems.DIM_TOTEM)) {
             totemStack = offHandStack;
-            totem = (DimTotemItem) offHandStack.getItem();
-            result = totem.teleportUse(player, destination, offHandStack);
         } else {
             player.sendMessageToClient(Text.translatable("msg.dimtotem.no_totem"), true);
             cir.setReturnValue(null);
             cir.cancel();
             return;
         }
+        totem = (DimTotemItem) mainHandStack.getItem();
+        result = totem.teleportUse(player, destination, totemStack);
         if(!result.getResult().isAccepted()) {
             player.sendMessageToClient(Text.translatable("msg.dimtotem.wrong_totem"), true);
             cir.setReturnValue(null);
             cir.cancel();
         }
-        if(FabricLoader.getInstance().isModLoaded("levelz")) {
-            PreMain.g.LOGGER.info("LevelZ detected, adding totem use to player stats");
-            List<Object> levelList = LevelLists.customItemList;
-            String dimension = totemStack.getOrCreateNbt().getString("dimension");
-            if (!PlayerStatsManager.playerLevelisHighEnough(player, levelList, dimension, true)) {
-                PreMain.g.LOGGER.info("Player level is not high enough to use totem");
-                player.sendMessage(Text.translatable("item.levelz." + levelList.get(0) + ".tooltip", levelList.get(1)).formatted(Formatting.RED), true);
-                cir.setReturnValue(null);
-                cir.cancel();
-            }
-            PreMain.g.LOGGER.info("Adding totem use to player stats");
-        }
+
     }
 }

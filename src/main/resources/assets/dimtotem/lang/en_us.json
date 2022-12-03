@@ -1,5 +1,5 @@
 {
-  "item.dimtotem.dimtotemitem": "Dimensional Totem",
+  "item.dimtotem.dimensional_totem": "Dimensional Totem",
   "tooltip.dimtotem.dimension": "Dimension: %s",
   "tooltip.dimtotem.not_dimension": "Not working totem",
   "msg.dimtotem.no_totem": "You don't have totem in your hand",

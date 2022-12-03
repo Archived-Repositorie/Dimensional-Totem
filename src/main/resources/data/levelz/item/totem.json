@@ -3,5 +3,5 @@
   "skill": "smithing",
   "level": 10,
   "item": "minecraft:custom_item",
-  "object": "minecraft:the_nether"
+  "object": "dimtotem:dimensional_totem"
 }

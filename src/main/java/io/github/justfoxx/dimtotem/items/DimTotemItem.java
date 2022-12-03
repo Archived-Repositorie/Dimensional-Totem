@@ -1,5 +1,6 @@
 package io.github.justfoxx.dimtotem.items;
 
+import io.github.justfoxx.dimtotem.PreMain;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
 import net.levelz.data.LevelLists;
@@ -21,6 +22,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DimTotemItem extends Item {
@@ -42,15 +44,26 @@ public class DimTotemItem extends Item {
         NbtCompound nbt = itemStack.getOrCreateNbt();
         String dimension = nbt.getString("dimension");
         ServerWorld destination = player.getServer().getWorld(RegistryKey.of(Registry.WORLD_KEY, new Identifier(dimension)));
-        if(!canUse(itemStack, player)) {
-            return TypedActionResult.fail(itemStack);
-        }
         if (destination == null) {
             return TypedActionResult.fail(itemStack);
         }
         if (world.getRegistryKey() != destination.getRegistryKey()) {
             return TypedActionResult.fail(itemStack);
         }
+        if(!canUse(itemStack, player)) {
+            return TypedActionResult.fail(itemStack);
+        }
+
+
+        var customList = LevelLists.customItemList;
+        String string = Registry.ITEM.getId(itemStack.getItem()).toString();
+        if (!customList.isEmpty() && !PlayerStatsManager.playerLevelisHighEnough(player, customList, string, true)) {
+            player.sendMessage(
+                    Text.translatable("item.levelz." + customList.get(customList.indexOf(string) + 1) + ".tooltip", customList.get(customList.indexOf(string) + 2)).formatted(Formatting.RED),
+                    true);
+            return TypedActionResult.fail(itemStack);
+        }
+
         itemStack.decrement(1);
         return TypedActionResult.success(itemStack);
     }
