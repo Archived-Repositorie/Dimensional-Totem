@@ -1,38 +1,42 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "dimtotem",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Dimensional Totem",
+  "description": "Totem to get into dimensions",
   "authors": [
-    "Me!"
+    "JustFoxx"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/JustFoxx/Dimensional-Totem",
+    "sources": "https://github.com/JustFoxx/Dimensional-Totem"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "LGPL-3.0",
+  "icon": "assets/dimtotem/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.github.justfoxx.dimtotem.Main"
+    ],
+    "preLaunch": [
+      "io.github.justfoxx.dimtotem.PreMain"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "dimtotem.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.14.10",
     "fabric-api": "*",
     "minecraft": "~1.19",
-    "java": ">=17"
+    "java": ">=17",
+    "ivycore": "*"
   },
-  "suggests": {
-    "another-mod": "*"
+  "recommends": {
+    "levelz": "*"
   }
 }
