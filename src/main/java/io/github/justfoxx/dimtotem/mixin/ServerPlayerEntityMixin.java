@@ -17,6 +17,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
@@ -53,7 +54,7 @@ public class ServerPlayerEntityMixin {
         } else if(offHandStack.isOf(RegistryItems.DIM_TOTEM)) {
             totemStack = offHandStack;
         } else {
-            player.sendMessageToClient(Text.translatable("msg.dimtotem.no_totem"), true);
+            player.sendMessage(new TranslatableText("msg.dimtotem.no_totem"), true);
             cir.setReturnValue(null);
             cir.cancel();
             return;
@@ -61,7 +62,7 @@ public class ServerPlayerEntityMixin {
         totem = (DimTotemItem) mainHandStack.getItem();
         result = totem.teleportUse(player, destination, totemStack);
         if(!result.getResult().isAccepted()) {
-            player.sendMessageToClient(Text.translatable("msg.dimtotem.wrong_totem"), true);
+            player.sendMessage(new TranslatableText("msg.dimtotem.wrong_totem"), true);
             cir.setReturnValue(null);
             cir.cancel();
         }

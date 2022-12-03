@@ -15,7 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -34,9 +36,9 @@ public class DimTotemItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         NbtCompound nbt = stack.getOrCreateNbt();
         if (nbt.contains("dimension")) {
-            tooltip.add(Text.translatable("tooltip.dimtotem.dimension", Text.of(nbt.getString("dimension"))).formatted(Formatting.GRAY));
+            tooltip.add(new TranslatableText("tooltip.dimtotem.dimension", Text.of(nbt.getString("dimension"))).formatted(Formatting.GRAY));
         } else {
-            tooltip.add(Text.translatable("tooltip.dimtotem.not_dimension").formatted(Formatting.RED));
+            tooltip.add((new TranslatableText("tooltip.dimtotem.not_dimension")).formatted(Formatting.RED));
         }
     }
 
@@ -58,9 +60,9 @@ public class DimTotemItem extends Item {
         var customList = LevelLists.customItemList;
         String string = Registry.ITEM.getId(itemStack.getItem()).toString();
         if (!customList.isEmpty() && !PlayerStatsManager.playerLevelisHighEnough(player, customList, string, true)) {
-            player.sendMessage(
-                    Text.translatable("item.levelz." + customList.get(customList.indexOf(string) + 1) + ".tooltip", customList.get(customList.indexOf(string) + 2)).formatted(Formatting.RED),
-                    true);
+//            player.sendMessage(
+//                    new TranslatableText("item.levelz." + customList.get(customList.indexOf(string) + 1) + ".tooltip", customList.get(customList.indexOf(string) + 2)).formatted(Formatting.RED),
+//                    true);
             return TypedActionResult.fail(itemStack);
         }
 
