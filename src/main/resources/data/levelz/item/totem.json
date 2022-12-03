@@ -1,7 +1,7 @@
 {
   "replace": false,
-  "skill": "smithing",
-  "level": 10,
+  "skill": "alchemy",
+  "level": 13,
   "item": "minecraft:custom_item",
   "object": "dimtotem:dimensional_totem"
 }
