@@ -64,8 +64,6 @@ public class DimTotemItem extends Item {
 //                    true);
                 return TypedActionResult.fail(itemStack);
             }
-
-            itemStack.decrement(1);
         }
 
         itemStack.decrement(1);
