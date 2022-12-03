@@ -55,13 +55,17 @@ public class DimTotemItem extends Item {
         }
 
 
-        var customList = LevelLists.customItemList;
-        String string = Registry.ITEM.getId(itemStack.getItem()).toString();
-        if (!customList.isEmpty() && !PlayerStatsManager.playerLevelisHighEnough(player, customList, string, true)) {
-            player.sendMessage(
-                    Text.translatable("item.levelz." + customList.get(customList.indexOf(string) + 1) + ".tooltip", customList.get(customList.indexOf(string) + 2)).formatted(Formatting.RED),
-                    true);
-            return TypedActionResult.fail(itemStack);
+        if(FabricLoader.getInstance().isModLoaded("levelz")) {
+            var customList = LevelLists.customItemList;
+            String string = Registry.ITEM.getId(itemStack.getItem()).toString();
+            if (!customList.isEmpty() && !PlayerStatsManager.playerLevelisHighEnough(player, customList, string, true)) {
+//            player.sendMessage(
+//                    new TranslatableText("item.levelz." + customList.get(customList.indexOf(string) + 1) + ".tooltip", customList.get(customList.indexOf(string) + 2)).formatted(Formatting.RED),
+//                    true);
+                return TypedActionResult.fail(itemStack);
+            }
+
+            itemStack.decrement(1);
         }
 
         itemStack.decrement(1);
