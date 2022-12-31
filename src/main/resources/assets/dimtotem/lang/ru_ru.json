@@ -1,0 +1,7 @@
+{
+  "item.dimtotem.dimensional_totem": "Пространственный тотем",
+  "tooltip.dimtotem.dimension": "Измерение: %s",
+  "tooltip.dimtotem.not_dimension": "Не работающий тотем",
+  "msg.dimtotem.no_totem": "У вас нет тотема в руке",
+  "msg.dimtotem.wrong_totem": "Вы не можете использовать этот тотем"
+}
